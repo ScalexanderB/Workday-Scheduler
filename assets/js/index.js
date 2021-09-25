@@ -25,7 +25,7 @@ $(document).ready(function() {
 
             // create div with classes : col-1 and saveBtn for the save button
             const saveDiv = $("<div>").addClass("col-1 d-flex align-items-center justify-content-center saveBtn save-block");
-            let saveBtnIcon = $("<button>").addClass("btn fas fa-save fa-lg save-button").attr("id", i).attr("title", "Save");
+            let saveBtnIcon = $("<button>").addClass("btn fas fa-save fa-lg save-button saveBtn").attr("id", i).attr("title", "Save");
 
             // append everything to schedule container
             $(".container").append(rowDiv.append(hourDiv, textDiv, saveDiv.append(saveBtnIcon)));
