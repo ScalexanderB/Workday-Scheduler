@@ -21,7 +21,7 @@ $(document).ready(function() {
             const hourDiv = $("<div>").addClass("col-1 hour time-block d-flex align-items-center justify-content-center").text(date.format("H a")).attr("id", `hour${i}`);
 
             // create div with classes : col-10 for schedule text area
-            const textDiv = $("<div>").addClass("col-10 time-block text-box save-block").attr("id", `text${i}`);
+            const textDiv = $("<textarea>").addClass("col-10 time-block text-box save-block").attr("id", `text${i}`);
 
             // create div with classes : col-1 and saveBtn for the save button
             const saveDiv = $("<div>").addClass("col-1 d-flex align-items-center justify-content-center saveBtn save-block");
@@ -44,5 +44,36 @@ $(document).ready(function() {
         }
     }
 
+    // call createScheduler on page load
+
+    $( window ).on("load", createScheduler());
+
+    let saveButton = $(".saveBtn");
+    let textBox = $(".text-box");
+    let clearBtn = $(".clr-btn");
+
+    // show the to-do's
+    function displayToDo() {
+        for (let i = 0; i < 12; i++) {
+            let storedCalList = localStorage.getItem("text" + i);
+            $("#text" + i).text(storedCalList);
+        }
+    }
+
+    // add to-do's
+    function addText(event) {
+        event.preventDefault();
+        localStorage.setItem($(this)[0].previousElementSibling.id, $(this)[0].previousElementSibling.value);
+    }
+
+    // click to save
+    saveButton.click(addText);
+    displayToDo();
     
+    // clear all
+    clearBtn.on("click", function(){
+        localStorage.clear();
+        textBox.empty();
+        location.reload();
+    });
 });
